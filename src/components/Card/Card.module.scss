@@ -1,0 +1,46 @@
+.card {
+    border-radius: var(--borderRadiusDefault);
+    background-color: var(--white);
+    margin: 1rem 0;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 25px;
+    // TODO: mobile: flex direction coloumn
+
+    img {
+        border-radius: var(--borderRadiusDefault);
+        padding: 1rem;
+        background: var(--charcoal);
+    }
+}
+
+.label {
+    text-transform: uppercase;
+    color: #808080;
+    font-size: small;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    font-size: 1.25rem;
+}
+
+.links {
+    font-size: small;
+    &::after {
+        content: '🔗'
+    }
+}
+
+.successful {
+    background-color: var(--lightGreen);
+}
+
+.failed {
+    background-color: var(--lightRed);
+}

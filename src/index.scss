@@ -10,6 +10,7 @@
   --lightRed: #eddbd6;
   --red: #d91616;
   --shadow: #c1c1c1;
+  --borderRadiusDefault: 10px;
 
   font-family: "Nunito Sans", sans-serif;
   font-synthesis: none;
@@ -36,39 +37,59 @@ a:hover {
   color: #535bf2;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+select {
+  padding: 10px;
+  background: var(--white);
+  font-family: inherit;
+  border: none;
+  border-radius: 7px;
+  font-size: 1rem;
+
+  &:focus {
+    border: none;
+    outline: 1px solid var(--secondary);
+  }
+}
+
+input,
+textarea {
+  border-radius: 7px;
+  border: 1px solid var(--primary);
+  padding: 10px;
+  font-family: inherit;
+  font-size: 1rem;
+
+  &:focus {
+    border: none;
+    outline: 1px solid var(--secondary);
+  }
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  padding: 10px;
+  background: var(--primary);
   font-family: inherit;
-  background-color: #1a1a1a;
+  border: none;
+  border-radius: 7px;
+  font-size: 1rem;
+  color: var(--white);
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+  &:hover {
+    background: var(--primaryDark);
+    box-shadow: 0px 0px 7px var(--shadow);
+  }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+// @media (prefers-color-scheme: light) {
+//   :root {
+//     color: #213547;
+//     background-color: #ffffff;
+//   }
+//   a:hover {
+//     color: #747bff;
+//   }
+//   button {
+//     background-color: #f9f9f9;
+//   }
+// }

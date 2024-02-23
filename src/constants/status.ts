@@ -1,0 +1,1 @@
+export const STATUS = ["all", "successful", "failed", "upcoming"];
