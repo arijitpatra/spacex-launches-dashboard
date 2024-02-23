@@ -1,21 +1,17 @@
 import styles from "./Card.module.scss";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Card = ({ data }: any) => {
+const Card = ({ data, innerRef = null }: any) => {
   // TODO: instead of whole data in props take things needed here as props including labels to make it more reusable
 
   return (
-    <section
-      className={`${styles.card} ${
-        data.upcoming ? "" : data.success ? styles.successful : styles.failed
-      }`}
-    >
+    <section ref={innerRef} className={`${styles.card}`}>
       <div>
         <img
           loading="lazy"
           src={data.links.patch.small}
-          width={50}
-          height={50}
+          width={100}
+          height={100}
           aria-label="rocket photo"
         />
       </div>
@@ -36,7 +32,15 @@ const Card = ({ data }: any) => {
         </div>
         <div>
           <div className={`${styles.label}`}>Status</div>
-          <div>
+          <div
+            className={`${
+              data.upcoming
+                ? ""
+                : data.success
+                ? styles.successful
+                : styles.failed
+            }`}
+          >
             {data.upcoming ? "Upcoming" : data.success ? "Success" : "Failed"}
           </div>
         </div>

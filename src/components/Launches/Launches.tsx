@@ -1,25 +1,22 @@
-import { LAUNCHES_QUERY_ENDPOINT, STATUS } from "../../constants";
-import { useQuery } from "@tanstack/react-query";
+import { LAUNCHES_QUERY_ENDPOINT } from "../../constants";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import Card from "../Card";
 import { useInView } from "react-intersection-observer";
-import Filter from "../Filter";
-import { useDeferredValue, useState } from "react";
-import styles from "./Launches.module.scss";
+import { useDeferredValue, useEffect, useState } from "react";
 import { getQueryDb } from "../../utils";
+import SearchAndFilterBar from "../SearchAndFilterBar";
 
 const Launches = () => {
-  //   const queryClient = useQueryClient();
   const [currentStatus, setCurrentStatus] = useState("all");
   const [searchText, setSearchText] = useState("");
   const deferredSearchText = useDeferredValue(searchText);
-  const { ref, inView } = useInView(); // TODO
+  const { ref, inView } = useInView();
 
   const queryDb = getQueryDb(currentStatus, deferredSearchText);
 
-  const query = useQuery({
-    queryKey: ["launches", currentStatus, deferredSearchText],
-    queryFn: () =>
-      fetch(LAUNCHES_QUERY_ENDPOINT, {
+  const fetchLaunches = async ({ pageParam }: { pageParam: number }) => {
+    try {
+      const response = await fetch(LAUNCHES_QUERY_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,6 +25,7 @@ const Launches = () => {
           query: queryDb,
           options: {
             limit: 10,
+            page: pageParam,
             select: {
               flight_number: 1,
               name: 1,
@@ -43,36 +41,67 @@ const Launches = () => {
             ],
           },
         }),
-      }).then((res) => res.json()), // data => data
+      }).then((res) => res.json()); //data => data
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const query = useQuery({
+  //   queryKey: ["launches", currentStatus, deferredSearchText],
+  //   queryFn: fetchLaunches,
+  // });
+
+  const {
+    data,
+    status,
+    error,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["launches", currentStatus, deferredSearchText],
+    queryFn: fetchLaunches,
+    initialPageParam: 1,
+    getNextPageParam: (metaData) => {
+      return metaData.nextPage;
+    },
   });
+
+  console.log(hasNextPage);
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, fetchNextPage]);
 
   return (
     <>
-      <section className={`${styles.filterAndSearchSection}`}>
-        <h2>{currentStatus} launches</h2>
-        <div className={`${styles.filterAndSearch}`}>
-          <Filter
-            label="Filter by status"
-            options={STATUS}
-            value={currentStatus}
-            onFilterChange={(e) => {
-              setCurrentStatus(e.target.value);
-            }}
-          />
-          <div>
-            <input
-              type="text"
-              placeholder="Search for rocket/mission/launchpad..."
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-          </div>
-        </div>
-      </section>
-      {query?.data?.docs?.length > 0
-        ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          query.data.docs.map((item: any) => <Card key={item.id} data={item} />)
-        : null}
+      <SearchAndFilterBar
+        status={currentStatus}
+        searchText={searchText}
+        onStatusChange={(e) => setCurrentStatus(e.target.value)}
+        onSearchChange={(e) => setSearchText(e.target.value)}
+      />
+      {status === "pending" ? <p>Loading...</p> : null}
+      {status === "error" ? <p>Error: {error.message}</p> : null}
+
+      {data?.pages.map((page) =>
+        page.docs.map((item, index) => {
+          if (page.docs.length === index + 1) {
+            return <Card key={item.id} innerRef={ref} data={item} />;
+          }
+          return <Card key={item.id} data={item} />;
+        })
+      )}
+
+      {isFetchingNextPage && <p>Loading more launches...</p>}
+      {hasNextPage === false && status !== "pending" && (
+        <p>Nothing more to load!</p>
+      )}
     </>
   );
 };

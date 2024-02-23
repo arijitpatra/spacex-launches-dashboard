@@ -6,8 +6,8 @@
   --secondary: #fb5c9d;
   --tertiary: #e1dcff;
   --white: #ffffff;
-  --lightGreen: #d6edd6;
-  --lightRed: #eddbd6;
+  --lightGreen: #36c136;
+  --lightRed: #cc5636;
   --red: #d91616;
   --shadow: #c1c1c1;
   --borderRadiusDefault: 10px;
@@ -51,13 +51,13 @@ select {
   }
 }
 
-input,
-textarea {
+input {
   border-radius: 7px;
-  border: 1px solid var(--primary);
+  border: none;
   padding: 10px;
   font-family: inherit;
   font-size: 1rem;
+  width: 100%;
 
   &:focus {
     border: none;
