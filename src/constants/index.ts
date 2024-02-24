@@ -1,2 +1,2 @@
-export * from './endpoints';
-export * from './status';
+export * from "./endpoints";
+export * from "./status";

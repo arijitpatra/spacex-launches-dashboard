@@ -1,2 +1,2 @@
-export * from './generateOptions';
-export * from './getQueryDb'
+export * from "./generateOptions";
+export * from "./getQueryDb";

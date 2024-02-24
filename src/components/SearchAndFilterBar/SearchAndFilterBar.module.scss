@@ -1,36 +1,39 @@
-.filterAndSearchSection {
-    display: flex;
-    justify-content: space-between;
-    text-transform: capitalize;
-    flex-direction: column;
-    flex-wrap: wrap;
-    
+.searchAndFilterBar {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  background: var(--gray);
 }
 
-.filterAndSearch {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 25px;
-    flex-wrap: wrap;
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
 }
 
 // mobile first CSS, here we are adjusting layout for bigger screens
 @media screen and (min-width: 920px) {
-    .filterAndSearchSection {
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 100px;
-    }
+  .searchAndFilterBar {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 100px;
+  }
 
-    .filterAndSearch {
-        justify-content: right;
-        flex-direction: row;
-    }
+  .controls {
+    justify-content: right;
+    flex-direction: row;
+    margin-bottom: 0;
+  }
 
-    .searchBox {
-        display: flex;
-        flex: 1
-    }
+  .searchBox {
+    display: flex;
+    flex: 1;
+  }
 }

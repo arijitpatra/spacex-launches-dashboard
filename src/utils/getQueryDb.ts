@@ -1,50 +1,41 @@
 export const getQueryDb = (status: string, text: string) => {
-  const textSearch = text ? {$text: { $search: text}} : {} // TODO: make it full text search/substsring
+  const textSearch = text.trim() ? { $text: { $search: text.trim() } } : {};
 
   switch (status) {
-    case "successful":
+    case "success":
       return {
         $and: [
-            { success: true },
-            {
-              $or: [
-                {...textSearch},
-              ]
-            }
-          ]
+          { success: true },
+          {
+            $or: [{ ...textSearch }],
+          },
+        ],
       };
     case "failed":
       return {
         $and: [
-            { success: false },
-            {
-                $or: [
-                {...textSearch},
-                ]
-            }
-          ]
+          { success: false },
+          {
+            $or: [{ ...textSearch }],
+          },
+        ],
       };
     case "upcoming":
       return {
         $and: [
-            { upcoming: true },
-            {
-                $or: [
-                {...textSearch},
-                ]
-            }
-          ]
+          { upcoming: true },
+          {
+            $or: [{ ...textSearch }],
+          },
+        ],
       };
     default:
       return {
         $and: [
-            {
-                $or: [
-                {...textSearch},
-                ]
-            }
-          ]
+          {
+            $or: [{ ...textSearch }],
+          },
+        ],
       };
   }
 };
-

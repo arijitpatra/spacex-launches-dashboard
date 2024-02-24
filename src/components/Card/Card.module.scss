@@ -1,70 +1,73 @@
 .card {
-    border-radius: var(--borderRadiusDefault);
-    background-color: var(--white);
-    margin: 2rem 0;
-    padding: 2rem;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 25px;
-    flex-direction: column;
+  border-radius: var(--borderRadiusDefault);
+  background-color: var(--white);
+  margin: 2rem 0;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 25px;
+  flex-direction: column;
 
-    img {
-        border-radius: var(--borderRadiusDefault);
-        padding: 1rem;
-        background: var(--charcoal);
-    }
+  img {
+    border-radius: var(--borderRadiusDefault);
+    padding: 1rem;
+    background: var(--charcoal);
+  }
 }
 
 // mobile first CSS, here we are adjusting layout for bigger screens
 @media screen and (min-width: 920px) {
-    section>div {
-        flex: 1 1 0;
-    }
-    .card {
-        flex-direction: row;
+  section > div {
+    flex: 1 1 0;
+  }
+  .card {
+    flex-direction: row;
 
-        &:hover {
-            transform: scale(1.1);
-            transition: 0.2s ease-in;
-            box-shadow: 0px 3px 11px var(--shadow);
-        }
+    &:hover {
+      transition: 0.25s ease-in;
+      box-shadow: 0px 3px 11px var(--shadow);
     }
+  }
 }
 
 .label {
-    text-transform: uppercase;
-    color: #808080;
-    font-size: small;
+  text-transform: uppercase;
+  color: #808080;
+  font-size: small;
 }
 
 .info {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  font-size: 1.25rem;
 }
 
 .links {
-    font-size: small;
-    &::after {
-        content: '🔗'
-    }
+  font-size: small;
+  &::after {
+    content: "🔗";
+  }
+
+  &[data-linktype="video"]::after {
+    content: "🎥";
+  }
 }
 
-.chip {
-    color: var(--white);
-    border-radius: var(--borderRadiusDefault);
-    padding: 0 1rem ;
+.pill {
+  color: var(--white);
+  border-radius: var(--borderRadiusDefault);
+  padding: 0 1rem;
 }
 
-.successful {
-    @extend .chip;
-    background-color: var(--lightGreen);
+.success {
+  @extend .pill;
+  background-color: var(--lightGreen);
 }
 
 .failed {
-    @extend .chip;
-    background-color: var(--lightRed);
+  @extend .pill;
+  background-color: var(--lightRed);
 }

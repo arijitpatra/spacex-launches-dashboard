@@ -1,15 +1,36 @@
 import styles from "./Card.module.scss";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Card = ({ data, innerRef = null }: any) => {
-  // TODO: instead of whole data in props take things needed here as props including labels to make it more reusable
+interface CardProps {
+  imageSrc: string;
+  flightNumber: number;
+  missionName: string;
+  rocketName: string;
+  status: Status;
+  launchpadName: string;
+  dateTimeUtc: string;
+  wikipediaLink: string;
+  webcastLink: string;
+  innerRef: React.Ref<HTMLElement> | null;
+}
 
+const Card = ({
+  imageSrc,
+  flightNumber,
+  missionName,
+  rocketName,
+  status,
+  launchpadName,
+  dateTimeUtc,
+  wikipediaLink,
+  webcastLink,
+  innerRef = null,
+}: CardProps) => {
   return (
     <section ref={innerRef} className={`${styles.card}`}>
       <div>
         <img
           loading="lazy"
-          src={data.links.patch.small}
+          src={imageSrc}
           width={100}
           height={100}
           aria-label="rocket photo"
@@ -18,64 +39,52 @@ const Card = ({ data, innerRef = null }: any) => {
       <div className={`${styles.info}`}>
         <div>
           <div className={`${styles.label}`}>Flight Number</div>
-          <div>{data.flight_number}</div>
+          <div>{flightNumber}</div>
         </div>
         <div>
           <div className={`${styles.label}`}>Mission</div>
-          <div>{data.name}</div>
+          <div>{missionName}</div>
         </div>
       </div>
       <div className={`${styles.info}`}>
         <div>
           <div className={`${styles.label}`}>Rocket</div>
-          <div>{data.rocket.name}</div>
+          <div>{rocketName}</div>
         </div>
         <div>
           <div className={`${styles.label}`}>Status</div>
           <div
             className={`${
-              data.upcoming
+              status === "Upcoming"
                 ? ""
-                : data.success
-                ? styles.successful
+                : status === "Success"
+                ? styles.success
                 : styles.failed
             }`}
           >
-            {data.upcoming ? "Upcoming" : data.success ? "Success" : "Failed"}
+            {status}
           </div>
         </div>
       </div>
       <div className={`${styles.info}`}>
         <div>
           <div className={`${styles.label}`}>Launchpad</div>{" "}
-          <div>{data.launchpad.name}</div>
+          <div>{launchpadName}</div>
         </div>
         <div>
           <div className={`${styles.label}`}>Date & Time (UTC)</div>
-          <div>
-            {new Date(data.date_utc).toLocaleString([], {
-              year: "numeric",
-              month: "short",
-              day: "2-digit",
-              hour: "2-digit",
-              minute: "2-digit",
-              hour12: false,
-            })}
-          </div>
+          <div>{dateTimeUtc}</div>
         </div>
       </div>
       <div className={`${styles.info}`}>
-        <a
-          className={`${styles.links}`}
-          href={data.links.wikipedia}
-          target="_blank"
-        >
+        <a className={`${styles.links}`} href={wikipediaLink} target="_blank">
           Wikipedia
         </a>
         <a
           className={`${styles.links}`}
-          href={data.links.webcast}
+          href={webcastLink}
           target="_blank"
+          data-linktype="video"
         >
           Webcast
         </a>

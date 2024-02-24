@@ -1,5 +1,4 @@
 import styles from "./Filter.module.scss";
-// import { MdFilterAlt } from "react-icons/md";
 import { generateOptions } from "../../utils";
 
 interface FilterProps {
@@ -12,9 +11,16 @@ interface FilterProps {
 const Filter = ({ label, options, value, onFilterChange }: FilterProps) => {
   return (
     <div className={`${styles.filter}`}>
-      {/* <MdFilterAlt className="react-icons" /> */}
-      <label htmlFor={label}>{label}: </label>
-      <select id={label} onChange={onFilterChange} value={value}>
+      <label htmlFor={label} aria-label={label}>
+        {label}:{" "}
+      </label>
+      <select
+        tabIndex={0}
+        id={label}
+        onChange={onFilterChange}
+        value={value}
+        aria-description="status filter dropdown"
+      >
         {generateOptions(options)}
       </select>
     </div>

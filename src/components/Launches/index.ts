@@ -1,1 +1,1 @@
-export {default} from './Launches'
+export { default } from "./Launches";

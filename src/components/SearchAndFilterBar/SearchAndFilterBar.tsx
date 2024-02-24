@@ -16,9 +16,9 @@ const SearchAndFilterBar = ({
   onSearchChange,
 }: SearchAndFilterBarProps) => {
   return (
-    <section className={`${styles.filterAndSearchSection}`}>
+    <section className={`${styles.searchAndFilterBar}`}>
       <h2>{status} launches 🚀</h2>
-      <div className={`${styles.filterAndSearch}`}>
+      <div className={`${styles.controls}`}>
         <Filter
           label="⚡️Filter by status"
           options={STATUS}
@@ -27,8 +27,10 @@ const SearchAndFilterBar = ({
         />
         <div className={`${styles.searchBox}`}>
           <input
+            aria-description="search box"
+            tabIndex={0}
             type="text"
-            placeholder="🔍 Search for rocket/mission/launchpad..."
+            placeholder="🔍 Type a mission or rocket name to search..."
             value={searchText}
             onChange={onSearchChange}
           />

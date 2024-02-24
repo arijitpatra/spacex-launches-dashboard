@@ -1,1 +1,1 @@
-export const STATUS = ["all", "successful", "failed", "upcoming"];
+export const STATUS = ["all", "success", "failed", "upcoming"];
