@@ -36,6 +36,7 @@ const Card = ({
           aria-label="rocket photo"
         />
       </div>
+
       <div className={`${styles.info}`}>
         <div>
           <div className={`${styles.label}`}>Flight Number</div>
@@ -46,6 +47,7 @@ const Card = ({
           <div>{missionName}</div>
         </div>
       </div>
+
       <div className={`${styles.info}`}>
         <div>
           <div className={`${styles.label}`}>Rocket</div>
@@ -66,6 +68,7 @@ const Card = ({
           </div>
         </div>
       </div>
+
       <div className={`${styles.info}`}>
         <div>
           <div className={`${styles.label}`}>Launchpad</div>{" "}
@@ -76,6 +79,7 @@ const Card = ({
           <div>{dateTimeUtc}</div>
         </div>
       </div>
+
       <div className={`${styles.info}`}>
         <a className={`${styles.links}`} href={wikipediaLink} target="_blank">
           Wikipedia

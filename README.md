@@ -1,13 +1,12 @@
-# SpaceX Launches Dashboard
+# SpaceX Launches Dashboard 🚀
 
 Welcome to the dashboard of SpaceX launches.
 
-This project is made using ReactJS, ViteJS, TypeScript, SCSS modules, ReactQuery, Testing Library React, Cypress and also has infinite scroll capabilities which uses the intersection observer concpets.
+This project is made using ReactJS, ViteJS, TypeScript, CSS modules, ReactQuery, Jest, Testing Library React, Cypress and also has filtering, searching & infinite scroll capabilities which uses the intersection observer concepts.
 
 ## Installation
 
-Run `npm install` and then run `npm run dev`, open localhost (check the port number in the terminal) in your browser to enjoy the app!
-
+Run `npm install` and then run `npm run dev`, open localhost (check the port number in the terminal) in your browser to enjoy the app! 🚀
 
 ## Expanding the ESLint configuration
 
@@ -19,12 +18,12 @@ If you are developing a production application, we recommend updating the config
 export default {
   // other rules...
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: ["./tsconfig.json", "./tsconfig.node.json"],
     tsconfigRootDir: __dirname,
   },
-}
+};
 ```
 
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`

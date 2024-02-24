@@ -2,6 +2,7 @@ import Card from "../Card";
 import { useDeferredValue, useState } from "react";
 import SearchAndFilterBar from "../SearchAndFilterBar";
 import { useFetchLaunchesInfinite } from "../../hooks";
+import { getLocaleFormattedDateTimeString } from "../../utils";
 
 const Launches = () => {
   const [currentStatus, setCurrentStatus] = useState("all");
@@ -41,14 +42,7 @@ const Launches = () => {
                 item.upcoming ? "Upcoming" : item.success ? "Success" : "Failed"
               }
               launchpadName={item.launchpad.name}
-              dateTimeUtc={new Date(item.date_utc).toLocaleString([], {
-                year: "numeric",
-                month: "short",
-                day: "2-digit",
-                hour: "2-digit",
-                minute: "2-digit",
-                hour12: false,
-              })}
+              dateTimeUtc={getLocaleFormattedDateTimeString(item.date_utc)}
               wikipediaLink={item.links.wikipedia}
               webcastLink={item.links.webcast}
             />
