@@ -1,7 +1,7 @@
 import styles from "./Filter.module.scss";
 import { generateOptions } from "../../utils";
 
-interface FilterProps {
+export interface FilterProps {
   label: string;
   options: string[];
   value: string;

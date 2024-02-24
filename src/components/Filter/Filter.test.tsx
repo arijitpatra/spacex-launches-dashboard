@@ -1,66 +1,38 @@
 import "@testing-library/jest-dom";
-import { render, fireEvent } from "@testing-library/react";
-import Filter from "./Filter";
+import { screen, render, fireEvent } from "@testing-library/react";
+import Filter, { FilterProps } from "./Filter";
 import { STATUS } from "../../constants";
 
-const label = "status";
-const options = STATUS;
-const value = "success";
-const onFilterChange = jest.fn();
+const mockFn = jest.fn();
+
+const filterProps: FilterProps = {
+  label: "status",
+  options: STATUS,
+  value: "success",
+  onFilterChange: mockFn,
+};
 
 describe("Unit tests for Filter:", () => {
-  test("renders label correctly:", () => {
-    const { getByText } = render(
-      <Filter
-        label={label}
-        options={options}
-        value={value}
-        onFilterChange={onFilterChange}
-      />
-    );
+  beforeEach(() => {
+    render(<Filter {...filterProps} />);
+  });
 
-    expect(getByText("status:")).toBeInTheDocument();
+  test("renders label correctly:", () => {
+    expect(screen.getByText("status:")).toBeInTheDocument();
   });
 
   test("renders selected value correctly:", () => {
-    const { getByLabelText } = render(
-      <Filter
-        label={label}
-        options={options}
-        value={value}
-        onFilterChange={onFilterChange}
-      />
-    );
-
-    expect(getByLabelText("status:")).toHaveValue("success");
+    expect(screen.getByLabelText("status:")).toHaveValue(filterProps.value);
   });
 
   test("renders all options correctly:", () => {
-    const { getByText } = render(
-      <Filter
-        label={label}
-        options={options}
-        value={value}
-        onFilterChange={onFilterChange}
-      />
-    );
-
-    options.forEach((option) => {
-      expect(getByText(option)).toBeInTheDocument();
+    STATUS.forEach((option) => {
+      expect(screen.getByText(option)).toBeInTheDocument();
     });
   });
 
   test("onFilterChange is called when filter is changed:", () => {
-    const { getByLabelText } = render(
-      <Filter
-        label={label}
-        options={options}
-        value={value}
-        onFilterChange={onFilterChange}
-      />
-    );
-
-    fireEvent.change(getByLabelText("status:"));
-    expect(onFilterChange).toHaveBeenCalledTimes(1);
+    fireEvent.change(screen.getByLabelText("status:"));
+    expect(mockFn).toHaveBeenCalledTimes(1);
   });
 });

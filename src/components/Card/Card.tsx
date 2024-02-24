@@ -1,6 +1,6 @@
 import styles from "./Card.module.scss";
 
-interface CardProps {
+export interface CardProps {
   imageSrc: string;
   flightNumber: number;
   missionName: string;
@@ -10,7 +10,7 @@ interface CardProps {
   dateTimeUtc: string;
   wikipediaLink: string;
   webcastLink: string;
-  innerRef: React.Ref<HTMLElement> | null;
+  innerRef?: React.Ref<HTMLElement> | null;
 }
 
 const Card = ({
@@ -33,7 +33,8 @@ const Card = ({
           src={imageSrc}
           width={100}
           height={100}
-          aria-label="rocket photo"
+          alt={`${rocketName} - rocket photo`}
+          aria-description={`${rocketName} - rocket photo`}
         />
       </div>
 

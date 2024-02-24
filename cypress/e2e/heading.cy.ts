@@ -1,5 +1,5 @@
 describe(
-  "application e2e test:",
+  "heading texts e2e test:",
   {
     viewportHeight: 1080,
     viewportWidth: 1920,

@@ -8,6 +8,8 @@ const Launches = () => {
   const [currentStatus, setCurrentStatus] = useState("all");
   const [searchText, setSearchText] = useState("");
   const deferredSearchText = useDeferredValue(searchText);
+
+  // using useFetchLaunchesInfinite custom hook to fetch launches data infinitely
   const { data, status, error, isFetchingNextPage, hasNextPage, ref } =
     useFetchLaunchesInfinite(currentStatus, deferredSearchText);
 
@@ -19,13 +21,15 @@ const Launches = () => {
         onStatusChange={(e) => setCurrentStatus(e.target.value)}
         onSearchChange={(e) => setSearchText(e.target.value)}
       />
+
       {status === "pending" ? <p>Loading...</p> : null}
+
       {status === "error" ? <p>Error: {error?.message}</p> : null}
 
       {data?.pages.map((page: ResponseData) =>
         page.docs.map((item: Doc, index: number) => {
+          // passing the ref to the last element in the list, so that the intersecton observer can trigger the infinite scroll
           let innerRef = null;
-
           if (page.docs.length === index + 1) {
             innerRef = ref;
           }
@@ -50,7 +54,8 @@ const Launches = () => {
         })
       )}
 
-      {isFetchingNextPage && <p>Loading more launches...</p>}
+      {isFetchingNextPage && <p>Loading more...</p>}
+
       {hasNextPage === false && status !== "pending" && (
         <p>Nothing more to load!</p>
       )}

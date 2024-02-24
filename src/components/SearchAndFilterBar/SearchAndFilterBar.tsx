@@ -18,6 +18,7 @@ const SearchAndFilterBar = ({
   return (
     <section className={`${styles.searchAndFilterBar}`}>
       <h2>{status} launches 🚀</h2>
+
       <div className={`${styles.controls}`}>
         <Filter
           label="⚡️Filter by status"
