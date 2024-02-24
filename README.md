@@ -2,13 +2,27 @@
 
 Welcome to the dashboard of SpaceX launches.
 
+![application screenshot](screenshot.png)
+
 This project is made using ReactJS, ViteJS, TypeScript, CSS modules, ReactQuery, Jest, Testing Library React, Cypress and also has filtering, searching & infinite scroll capabilities which uses the intersection observer concepts.
 
 ## Installation
 
-Run `npm install` and then run `npm run dev`, open localhost (check the port number in the terminal) in your browser to enjoy the app! 🚀
+Run `npm install`
 
-## Expanding the ESLint configuration
+## Running the app
+
+Run `npm run dev`, open localhost (check the port number in the terminal) in your browser to enjoy the app! 🚀
+
+## Running unit tests
+
+Run `npm run test`
+
+## Running e2e tests
+
+Run `npm run cypress:open`
+
+## Expanding the ESLint configuration (optional)
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
