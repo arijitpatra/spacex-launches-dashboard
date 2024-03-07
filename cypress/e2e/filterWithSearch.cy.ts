@@ -7,7 +7,7 @@ describe(
   () => {
     beforeEach(() => {
       cy.intercept("POST", "/v5/launches/query").as("postData");
-      cy.visit("/"); // Assuming this is your localhost URL configured in cypress.config.ts
+      cy.visit("/");
     });
 
     it("Search for a specific rocket name with status success", () => {

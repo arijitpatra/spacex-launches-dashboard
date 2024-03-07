@@ -6,7 +6,7 @@ describe(
   },
   () => {
     beforeEach(() => {
-      cy.visit("/"); // Assuming this is your localhost URL configured in cypress.config.ts
+      cy.visit("/");
     });
 
     it("Search for a mission name", () => {

@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { screen, render } from "@testing-library/react"; // Changed import to getByAltText
+import { screen, render } from "@testing-library/react";
 import Card, { CardProps } from "./Card";
 
 describe("Unit test for Card:", () => {
